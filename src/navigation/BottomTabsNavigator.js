@@ -1,0 +1,28 @@
+import React from "react";
+import { View } from "react-native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { VideosScreen } from "../screens/VideosScreen";
+import { HomeScreen } from "../screens/HomeScreen";
+
+const { Navigator, Screen } = createBottomTabNavigator();
+
+const BottomTabBar = ({ navigation, state }) => (
+  <View>
+    <Divider />
+    <BottomNavigation
+      appearance="noIndicator"
+      selectedIndex={state.index}
+      onSelect={(index) => navigation.navigate(state.routeNames[index])}
+    >
+      <BottomNavigationTab title="Home" />
+      <BottomNavigationTab title="Info" />
+    </BottomNavigation>
+  </View>
+);
+
+export const BottomTabsNavigator = () => (
+  <Navigator tabBar={(props) => <BottomTabBar {...props} />}>
+    <Screen name="Home" component={HomeScreen} />
+    <Screen name="Videos" component={VideosScreen} />
+  </Navigator>
+);
